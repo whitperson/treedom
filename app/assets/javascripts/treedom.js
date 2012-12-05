@@ -5,8 +5,22 @@ $(function(){
 });
 
 function get_text()
+
 {
-  var url_text = $('#url').val()
-  alert(url_text);
-  //console.log('js functions')
+  var url_text = $('#url').val();
+  $.ajax({
+    type: "POST",
+    url: "/search",
+    data: { url: url_text }
+  }).done(function(msg) {
+
+    display_text(msg);
+    console.log(msg);
+  });
+}
+
+function display_text(words)
+{
+  $('#display_text').empty();
+  $('#display_text').append(words);
 }
